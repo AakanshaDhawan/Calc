@@ -11,6 +11,7 @@ class Calc implements ActionListener
     JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,b0,bdiv,bmul,bsub,badd,bdec,beq,bdel,bclr;
  
     static double a=0,b=0,result=0;
+    String c="";
     static int operator=0;
  
     Calc()
@@ -145,47 +146,52 @@ class Calc implements ActionListener
         {
             a=Double.parseDouble(t.getText());
             operator=1;
-            t.setText("");
+            t.setText(t.getText()+"+");
         } 
         
         if(e.getSource()==bsub)
         {
             a=Double.parseDouble(t.getText());
             operator=2;
-            t.setText("");
+            t.setText(t.getText()+"-");
         }
         
         if(e.getSource()==bmul)
         {
             a=Double.parseDouble(t.getText());
             operator=3;
-            t.setText("");
+            t.setText(t.getText()+"*");
         }
         
         if(e.getSource()==bdiv)
         {
             a=Double.parseDouble(t.getText());
             operator=4;
-            t.setText("");
+            t.setText(t.getText()+"/");
         }
         
         if(e.getSource()==beq)
         {
-            b=Double.parseDouble(t.getText());
-        
+            
+            c=t.getText();
+            
             switch(operator)
             {
-                case 1: result=a+b;
-                    break;
+                case 1: b=Double.parseDouble(c.substring(c.lastIndexOf("+") + 1));
+                        result=a+b;
+                        break;
         
-                case 2: result=a-b;
-                    break;
+                case 2: b=Double.parseDouble(c.substring(c.lastIndexOf("-") + 1));
+                        result=a-b;
+                        break;
         
-                case 3: result=a*b;
-                    break;
+                case 3: b=Double.parseDouble(c.substring(c.lastIndexOf("*") + 1));
+                        result=a*b;
+                        break;
         
-                case 4: result=a/b;
-                    break;
+                case 4: b=Double.parseDouble(c.substring(c.lastIndexOf("/") + 1));
+                        result=a/b;
+                        break;
         
                 default: result=0;
             }
